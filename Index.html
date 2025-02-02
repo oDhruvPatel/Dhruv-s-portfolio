@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./Style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Portfolio</title>
+  <style>
+     .cursiv {
+      font-family: 'Dancing Script', cursive;
+     }
+
+     .poppins{
+      font-family: 'poppins';
+     }
+    body {
+      font-family: 'Roboto', sans-serif;
+      overflow: hidden;
+      background: rgb(8,8,8);
+      background-image: linear-gradient(to right, rgba(8, 8, 8, 0.8) 1px, transparent 1px), linear-gradient(to bottom, rgba(8, 8, 8, 0.8) 1px, transparent 1px);
+      background-size: 20px 20px; /* Grid size */
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Inter', sans-serif;
+    }
+
+    #myImg {
+      background: url('./DP.jpeg');
+      background-position: top;
+      background-size: cover;
+      transition: all 0.5s;
+    }
+
+    #myImg:hover{
+      scale: 1.1;
+    }
+
+    #dynamic-greeting {
+      display: inline-block;
+      transition: opacity 0.5s ease-in-out;
+      opacity: 1;
+      width: 100%;  /* Fixed width */
+    }
+
+    .fade-out {
+      opacity: 0;
+    }
+
+    .grid {
+      opacity: 80%;
+  height: 100%;
+  width: 1px;
+  background: linear-gradient(to bottom, rgba(128, 128, 128, 0.2) 70%, rgba(128, 128, 128, 0) 100%);
+}
+
+
+.tech{
+  width: 220px;
+  height: 60px;
+  background: rgb(18, 18, 18);
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .tech {
+    width: 250px;
+  }
+
+  
+
+
+}
+
+
+
+
+  </style>
+</head>
+
+<body class="bg-[rgb(8,8,8)]">
+  <main class="h-full md:w-[65vw] w-screen mx-auto md:p-0">
+
+    <div class="bg-transparent w-screen h-screen absolute top-0 left-0 flex justify-evenly -z-10">
+      <div class="grid"></div>
+      <div class="grid"></div>
+      <div class="grid"></div>
+      <div class="grid"></div>
+      <div class="grid"></div>
+      <div class="grid"></div>
+      <div class="grid md:block hidden"></div>
+      <div class="grid md:block hidden"></div>
+      <div class="grid md:block hidden"></div>
+      <div class="grid md:block hidden"></div>
+      <div class="grid md:block hidden"></div>
+      <div class="grid md:block hidden"></div>
+      <div class="grid md:block hidden"></div>
+      <div class="grid md:block hidden"></div>
+    </div>
+
+  
+
+
+   <nav class="z-20 md:flex hidden sticky absolute top-2 w-full h-14 flex justify-between items-center mt-4 bg-[rgb(28,28,28)] text-gray-100/50 border border-[2px] border-gray-50/5 rounded-md pl-4 pr-2">
+     <div class="w-[15%] cursor-pointer cursiv text-gray-100 text-2xl">dp</div>
+     <div class="w-[70%] flex items-center justify-center gap-8">
+      <ul class="cursor-pointer hover:text-gray-100"><a href="">Home</a></ul>
+      <ul class="cursor-pointer hover:text-gray-100"><a href="#About">About</a></ul>
+      <ul class="cursor-pointer hover:text-gray-100"><a href="#Projects">Projects</a></ul>
+      <ul class="cursor-pointer hover:text-gray-100"><a href="#Education">Experience</a></ul>
+     </div>
+     <div class="w-[15%] cursor-pointer flex justify-end">
+      <button class="px-3 py-2 bg-indigo-200 rounded-md text-[rgb(8,8,8)] text-xs">
+        <a href="#Contact">Let's talk &#x2192;</a>
+      </button>
+     </div>
+   </nav>
+
+  <!-- Mobile Navbar -->
+<!-- Mobile Navbar -->
+<nav class="z-20 md:hidden sticky top-0 w-full h-14 flex justify-between items-center  bg-[rgb(28,28,28)] text-gray-100/50 border border-[2px] border-gray-50/5  pl-4 pr-2">
+  <div class="w-[50%] cursor-pointer cursiv text-gray-100 text-2xl">dp</div>
+  <div class="w-[50%] cursor-pointer flex justify-end">
+    <button
+      id="menu-button"
+      class="px-3 py-2 bg-gray-200 rounded-md text-[rgb(8,8,8)] text-xs"
+    >
+      Menu
+    </button>
+  </div>
+</nav>
+
+<!-- Hidden Menu Items -->
+<div
+  id="menu-items"
+  class="sticky top-14 left-0 w-full bg-[rgb(28,28,28)] text-gray-100 flex flex-col items-center gap-4 py-4 hidden z-50"
+>
+  <ul class="cursor-pointer hover:text-gray-100">Home</ul>
+  <ul class="cursor-pointer hover:text-gray-100">About</ul>
+  <ul class="cursor-pointer hover:text-gray-100">Projects</ul>
+  <ul class="cursor-pointer hover:text-gray-100">Experience</ul>
+  <button class="px-3 py-2 bg-gray-200 rounded-md text-[rgb(8,8,8)] text-xs">
+    Let's talk &#x2192;
+  </button>
+</div>
+
+   <section class="w-full h-full md:mt-30 mb-64 my-32 md:px-0 px-2">
+    <div class="flex w-full h-full items-center justify-center gap-4">
+      <div class="profile h-28 w-28 rounded-full bg-transparent border-[1px]/40" id="myImg"></div>
+    </div>
+
+    <div class="mt-7 mb-8 text-gray-100/50 md:text-3xl text-2xl w-full flex justify-center items-center flex-col">  
+      <h1>
+        <span id="dynamic-greeting" class="text-purple-200"> </span><br>
+        <h1 class="font-medium w-full flex items-center text-3xl justify-center text-center body text-transparent bg-clip-text bg-gradient-to-r from-gray-600 via-gray-300 to-white">
+          I am Dhruv <br>a software engineer with 4 months of industry experience
+        </h1>
+        </h1>  
+    </div>
+
+    <div class="w-full h-full flex gap-9 justify-center">
+      
+      <button class="px-5 py-2 font-medium rounded-md text-sm bg-[rgb(18,18,18)] flex items-center justify-center border border-gray-200/10 hover:bg-[rgb(38,38,38)]">
+        <h1 class="flex items-center gap-2 text-gray-200 font-medium">
+            <a href="#first">Scroll Down</a> 
+            <span class="text-xl mb-[1px]">&#x2193;</span>
+        </h1>
+      </button>
+
+      
+
+    </div>
+   </section>
+
+   <section class="w-full h-full rounded-lg md:px-0 px-2" id="first">
+      
+    <h1 class="text-gray-200/70 text-xl w-full text-center"> <span class="text-gray-100">Technologies</span> that I work with</h1>
+
+   <div class="flex flex-col justify-center items-center w-full gap-4 mt-8">
+    <div class="flex md:flex-row flex-col w-full justify-center items-center gap-4">
+
+      <div class="tech text-white z-10 flex p-1 text-sm gap-3">
+        <div class="w-[30%] h-full rounded-lg flex items-center justify-center"><img src="./imgs/figma.png" class="h-10 w-10" alt=""></div>
+    
+        <div class="w-[70%] h-full flex flex-col items-start justify-center">
+          <span>Figma</span>
+          <span class="opacity-30">for web designing</span>
+        </div>
+      </div>
+
+      <div class="tech text-white z-10 flex p-1 text-sm gap-3">
+        <div class="w-[30%] h-full rounded-lg flex items-center justify-center"><img src="./imgs/science.png" class="h-10 w-10" alt=""></div>
+        <div class="w-[70%] h-full flex flex-col items-start justify-center">
+          <span>React</span>
+          <span class="opacity-30">a JavaScript library</span>
+        </div>
+      </div>
+
+      <div class="tech text-white z-10 flex p-1 text-sm gap-3">
+        <div class="w-[30%] h-full rounded-lg flex items-center justify-center"><img src="./imgs/node-js.png" class="h-10 w-10" alt=""></div>
+        <div class="w-[70%] h-full flex flex-col items-start justify-center">
+          <span>Node</span>
+          <span class="opacity-30">a JavaScript library</span>
+        </div>
+      </div>
+
+      
+
+      <div class="tech text-white z-10 flex p-1 text-sm gap-3">
+        <div class="w-[30%] h-full rounded-lg flex items-center justify-center"><img src="./imgs/express.png" class="h-10 w-10" alt=""></div>
+        <div class="w-[70%] h-full flex flex-col items-start justify-center">
+          <span>Express</span>
+          <span class="opacity-30">a Node.js Framework</span>
+        </div>
+      </div>
+      </div>
+
+
+  <!-- second row -->
+      <div class="flex md:flex-row flex-col w-full justify-center items-center gap-4">
+
+        <div class="tech text-white z-10 flex p-1 text-sm gap-3">
+          <div class="w-[30%] h-full rounded-lg flex items-center justify-center"><img src="./imgs/Mongo.png" class="h-10 w-10" alt=""></div>
+          <div class="w-[70%] h-full flex flex-col items-start justify-center">
+            <span>MongoDB</span>
+            <span class="opacity-30">for backend database</span>
+          </div>
+        </div>
+
+        <div class="tech text-white z-10 flex p-1 text-sm gap-3">
+          <div class="w-[30%] h-full rounded-lg flex items-center justify-center"><img src="./imgs/firebase.png" class="h-10 w-10" alt=""></div>
+         <div class="w-[70%] h-full flex flex-col items-start justify-center">
+            <span>Google Firebase</span>
+            <span class="opacity-30">for database</span>
+          </div>
+        </div>
+
+        <div class="tech text-white z-10 flex p-1 text-sm gap-3">
+          <div class="w-[30%] h-full rounded-lg flex items-center justify-center"><img src="./imgs/tailwind.png" class="h-10 w-10" alt=""></div>
+          <div class="w-[70%] h-full flex flex-col items-start justify-center">
+            <span>Tailwindcss</span>
+            <span class="opacity-30">css framework</span>
+          </div>
+        </div>
+
+        <div class="tech text-white z-10 flex p-1 text-sm gap-3">
+          <div class="w-[30%] h-full rounded-lg flex items-center justify-center"><img src="./imgs/xd.png" class="h-10 w-10" alt=""></div>
+        <div class="w-[70%] h-full flex flex-col items-start justify-center">
+            <span>Adobe XD</span>
+            <span class="opacity-30">For website designing</span>
+          </div>
+        </div>
+
+
+    </div>
+   </div>
+    
+
+   </section>
+
+
+   <section class="w-full h-full mt-28 rounded-lg md:px-0 px-2" id="Projects">
+      
+    <h1 class="text-gray-200/70 text-xl w-full text-center"> <span class="text-gray-100">Projects</span> that I have worked with</h1>
+
+    <div class="w-full h-full mt-12 flex md:flex-row flex-col flex-wrap justify-center md:gap-16 gap-6">
+          
+          <div class="md:h-96 md:w-[45%] w-full h-80 bg-[rgb(18,18,18)] rounded-md flex flex-col p-4 gap-4 border border-[1px] border-gray-100/5">
+            
+               <div class="w-full h-[75%] bg-indigo-200 rounded-lg overflow-hidden"> 
+                 <img src="https://www.lexika-translations.com/wp-content/uploads/2021/07/Duolingo.png" class="" alt="">
+               </div>
+               <div class="w-full h-[25%]    rounded-md  "> 
+                  <h1 class="text-gray-100/90 font-bold mb-1">Language Learning App(DuolingoClone)</h1>
+                  <p class="text-sm text-gray-100/40">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit inventore quia vel 
+                    sunt ex maiores esse eaque blanditiis numquam provident.</p>
+               </div>
+
+               <button class="px-5 py-2 font-medium rounded-md text-sm bg-[rgb(28,28,28)] flex items-center justify-center border border-gray-200/10 hover:bg-[rgb(38,38,38)]">
+                <h1 class="flex items-center gap-2 text-gray-200 font-medium">
+                    View more
+                </h1>
+              </button>
+
+          </div>
+
+
+          <div class="md:h-96 md:w-[45%] w-full h-80 bg-[rgb(18,18,18)] rounded-md flex flex-col p-4 gap-4 border border-[1px] border-gray-100/5">
+            
+            <div class="w-full h-[75%] bg-indigo-200 rounded-lg overflow-hidden "> 
+              <img src="https://marketplace.canva.com/EAFmhdAGpWA/1/0/1600w/canva-black-and-pink-gradient-motivational-quote-desktop-wallpaper-PrgxdKbp8Jk.jpg" class="" alt="">
+            </div>
+            <div class="w-full h-[25%]    rounded-md  "> 
+               <h1 class="text-gray-100/90 font-bold mb-1">Quote Sharing App</h1>
+               <p class="text-sm text-gray-100/40">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit inventore quia vel 
+                 sunt ex maiores esse eaque blanditiis numquam provident.</p>
+            </div>
+
+            <button class="px-5 py-2 font-medium rounded-md text-sm bg-[rgb(28,28,28)] flex items-center justify-center border border-gray-200/10 hover:bg-[rgb(38,38,38)]">
+             <h1 class="flex items-center gap-2 text-gray-200 font-medium">
+                 View more
+             </h1>
+           </button>
+
+       </div>
+
+
+       <div class="md:h-96 md:w-[45%] w-full h-80 bg-[rgb(18,18,18)] rounded-md flex flex-col p-4 gap-4 border border-[1px] border-gray-100/5">
+            
+        <div class="w-full h-[75%] bg-indigo-200 rounded-lg overflow-hidden"> 
+          <img src="https://www.slideteam.net/media/catalog/product/cache/1280x720/h/o/house_price_prediction_through_machine_learning_ml_cd_slide01.jpg" class="" alt="">
+        </div>
+        <div class="w-full h-[25%]    rounded-md  "> 
+           <h1 class="text-gray-100/90 font-bold mb-1">House Price Prediction</h1>
+           <p class="text-sm text-gray-100/40">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit inventore quia vel 
+             sunt ex maiores esse eaque blanditiis numquam provident.</p>
+        </div>
+
+        <button class="px-5 py-2 font-medium rounded-md text-sm bg-[rgb(28,28,28)] flex items-center justify-center border border-gray-200/10 hover:bg-[rgb(38,38,38)]">
+         <h1 class="flex items-center gap-2 text-gray-200 font-medium">
+             View more
+         </h1>
+       </button>
+
+   </div>
+
+
+   <div class="md:h-96 md:w-[45%] w-full h-80 bg-[rgb(18,18,18)] rounded-md flex flex-col p-4 gap-4 border border-[1px] border-gray-100/5">
+            
+    <div class="w-full h-[75%] bg-indigo-200 rounded-lg overflow-hidden"> 
+      <img src="https://i.ytimg.com/vi/L8QzFU0k5OA/maxresdefault.jpg" class="" alt="">
+    </div>
+    <div class="w-full h-[25%]    rounded-md  "> 
+       <h1 class="text-gray-100/90 font-bold mb-1">Collaborative Code Editor</h1>
+       <p class="text-sm text-gray-100/40">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit inventore quia vel 
+         sunt ex maiores esse eaque blanditiis numquam provident.</p>
+    </div>
+
+    <button class="px-5 py-2 font-medium rounded-md text-sm bg-[rgb(28,28,28)] flex items-center justify-center border border-gray-200/10 hover:bg-[rgb(38,38,38)]">
+     <h1 class="flex items-center gap-2 text-gray-200 font-medium">
+        View more
+     </h1>
+   </button>
+
+</div>
+
+    </div>
+    
+    </section>
+
+
+    <section class="w-full h-full mt-28 rounded-lg md:px-0 px-2">
+      
+      <div class="w-full h-12 rounded-md bg-[rgb(18,18,18)] p-1 flex gap-2 relative">
+        <button id="edu-btn" class="w-full py-2 font-medium rounded-md text-sm bg-[rgb(18,18,18)] flex items-center justify-center transition-all duration-300" onclick="toggleActive(this)">
+            <h1 class="flex items-center gap-2 text-gray-200 font-medium z-10">
+                Education
+            </h1>
+        </button>
+    
+        <button id="exp-btn" class="w-full py-2 font-medium rounded-md text-sm bg-[rgb(18,18,18)] flex items-center justify-center transition-all duration-300" onclick="toggleActive(this)">
+            <h1 class="flex items-center gap-2 text-gray-200 font-medium z-10">
+                Experience
+            </h1>
+        </button>
+    
+        <div id="indicator" class="z-5 absolute w-1/2 h-[80%] rounded-md bg-[rgb(48,48,48)] border-[1px] border-gray-100/5 transition-all duration-300"></div>
+    </div>
+ 
+      <div class="w-full h-auto py-8 flex items-center" id="Education">
+         
+       <div class="timeline">
+        
+        <div class="cont left-cont">
+          <div class="h-4 w-4 bg-indigo-200 rounded-full dott"></div>
+          <div class="text-box">
+            <h2 class="!text-gray-100 text-md">Master of Applied Computing</h2>
+            <small class="text-xs text-white/70">2025 - present</small>
+            <p class="text-sm">Ongoing (No Grade Yet), Focusing on Software Engineering and Computing Concepts</p>
+            <span class="left-cont-arrow"> </span>
+          </div>
+        </div>
+
+        <div class="cont right-cont">
+          <div class="h-4 w-4 bg-indigo-200 rounded-full dott"></div>
+          <div class="text-box">
+            <h2 class="!text-gray-100 text-md">B.E Computer Science</h2>
+            <small class="text-xs text-white/70">2021 - 2024</small>
+            <p class="text-sm">8.30/10 GPA, Learned Data Structures, and specialized on AI/ML and Machine Learning </p>
+            <span class="right-cont-arrow"> </span>
+          </div>
+        </div>
+
+
+        <div class="cont left-cont">
+          <div class="h-4 w-4 bg-indigo-200 rounded-full dott"></div>
+          <div class="text-box">
+            <h2 class="!text-gray-100 text-md">Diploma in Computer Engineering</h2>
+            <small class="text-xs text-white/70">2018 - 2021</small>
+            <p class="text-sm">8.90/10 GPA, learned Web development skills, developed varios projects</p>
+            <span class="left-cont-arrow"> </span>
+          </div>
+        </div>
+
+
+        <div class="cont right-cont">
+          <div class="h-4 w-4 bg-indigo-200 rounded-full dott"></div>
+          <div class="text-box">
+            <h2 class="!text-gray-100 text-md">10th grade</h2>
+            <small class="text-xs text-white/70">2018</small>
+            <p class="text-sm">67% , Learnd basic computer skills, like MS word, Excel, HTML, CSS</p>
+            <span class="right-cont-arrow"> </span>
+          </div>
+        </div>
+
+
+       </div>
+
+     </div>
+    
+
+    
+      
+      
+ 
+      <div class="w-full h-auto py-8 flex items-center" id="Experience">
+         
+       <div class="timeline">
+        
+        <div class="cont left-cont">
+          <div class="h-4 w-4 bg-indigo-200 rounded-full dott"></div>
+          <div class="text-box">
+            <h2 class="!text-gray-100 text-md">Software Developer - Full Stack</h2>
+            <small class="text-xs text-white/70">2024</small>
+            <p class="text-sm">Worked with React, Node, MongoDB, Express and worked on live projects</p>
+            <span class="left-cont-arrow"> </span>
+          </div>
+        </div>
+
+        <div class="cont right-cont">
+          <div class="h-4 w-4 bg-indigo-200 rounded-full dott"></div>
+          <div class="text-box">
+            <h2 class="!text-gray-100 text-md">Software Developer intern - CyberSec & Iot</h2>
+            <small class="text-xs text-white/70">2023</small>
+            <p class="text-sm">Worked with Iot devices, SAP analytics Cloud</p>
+            <span class="right-cont-arrow"> </span>
+          </div>
+        </div>
+
+       </div>
+
+    </div>
+
+
+   <section id="About" class="w-full h-full mt-20 bg-[rgb(28,28,28)] rounded-lg md:p-8 p-4">
+     <h1 class="md:text-xl text-sm text-gray-100/40">
+        
+      <span class="text-gray-100/70">Dhruv Patel is a Master’s student in Applied Computing with a background in software development. 
+        He has gained hands-on experience in Node.js through internships</span> and worked with tools like Power BI 
+      and SAP Analytics Cloud for data analysis. Dhruv is passionate about innovation and exploring fields like 
+      Cyber Security in IoT. He’s also focused on building a professional developer portfolio and aspires to become 
+      a software engineer. Outside of tech, Dhruv enjoys cooking and continuously seeks new opportunities to learn and grow.
+     </h1>
+     <h2 class="cursiv text-gray-100 text-3xl mt-4">dhruv</h2>
+
+     <div class="flex gap-8 mt-8 text-gray-100">
+      <h1>
+        <div class="font-extrabold text-3xl">5<span class="text-lime-400">+</span></div>
+        <span class="text-[11px] uppercase text-gray-100/40">projects done</span>
+       </h1>
+  
+       <h1>
+        <div class="font-extrabold text-3xl">4<span class="text-lime-400">+</span></div>
+        <span class="text-[11px] uppercase text-gray-100/40">months of experience</span>
+       </h1>
+  
+       <h1>
+        <div class="font-extrabold text-3xl">100<span class="text-lime-400">%</span></div>
+        <span class="text-[11px] uppercase text-gray-100/40">client satisfaction</span>
+       </h1>
+     </div>
+
+   </section>
+
+
+   <section id="Contact" class="w-full h-full mt-20 rounded-lg md:p-8 p-4">
+    
+   
+      <div class="md:w-[40%] w-full flex mx-auto">
+        <div class="w-full">
+       
+          <h1 class="w-full text-center  text-gray-200/70">contact me</h1>
+      <h1 class="text-gray-100 my-2 w-full text-center"> <span class="text-gray-100/70 ">Email me at:
+      </span> <span class="underline font-medium">dhruvptl273@gmail.com</span> </h1>
+  
+      <h1 class="text-gray-100 my-2 w-full text-center"> <span class="text-gray-100/70 ">Contact me at:
+      </span> <span class="underline font-medium">+1 (519) 980-7637</span> </h1>
+  
+        </div>
+      
+  
+  
+  
+     <div class="w-full">
+  
+      <h1 class="w-full text-center mt-2  text-gray-100/70">
+        socials
+      </h1>
+  
+      <div class="flex flex-col w-full  text-indigo-200 justify-center items-center mt-2">
+         <ul> <a href="https://www.linkedin.com/in/dhruvptl2702/">LinkedIn</a> </ul>
+         <ul> <a href="https://x.com/Dhruv_2723">Twitter</a> </ul>
+         <ul> <a href="https://github.com/oDhruvPatel">Github</a> </ul>
+      </div>
+     </div>
+      </div>
+
+   </section>
+
+
+  
+
+
+
+  </main>
+
+  <!-- Lenis Smooth Scrolling -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@latest/bundled/lenis.min.js"></script>
+  <script>
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => 1 - Math.pow(1 - t, 3),
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Dynamic Greeting Script
+  
+
+  </script>
+  <script>
+    const greetings = ["Namaste,", "Hello,", "Bonjour,", "Hola,", "Ciao,", "Konnichiwa,", "Guten Tag,"];
+    let index = 0;
+    let charIndex = 0;
+    const typingSpeed = 100; // Speed of typing each character
+    const deletingSpeed = 20; // Speed of deleting each character
+    const delayBetweenGreetings = 2000; // Pause before deleting
+    const dynamicGreeting = document.getElementById("dynamic-greeting");
+  
+    function typeGreeting() {
+      if (charIndex < greetings[index].length) {
+        dynamicGreeting.textContent += greetings[index].charAt(charIndex);
+        charIndex++;
+        setTimeout(typeGreeting, typingSpeed);
+      } else {
+        setTimeout(deleteGreeting, delayBetweenGreetings);
+      }
+    }
+  
+    function deleteGreeting() {
+      if (charIndex > 0) {
+        dynamicGreeting.textContent = greetings[index].substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(deleteGreeting, deletingSpeed);
+      } else {
+        index = (index + 1) % greetings.length; // Move to the next greeting
+        setTimeout(typeGreeting, typingSpeed);
+      }
+    }
+  
+    typeGreeting(); // Start the typing effect
+  </script>
+  
+  <!-- JavaScript -->
+<script>
+  const menuButton = document.getElementById("menu-button");
+  const menuItems = document.getElementById("menu-items");
+
+  menuButton.addEventListener("click", () => {
+    menuItems.classList.toggle("hidden"); // Toggle visibility
+  });
+</script>
+
+<script>
+  function toggleActive(button) {
+    // Remove the 'active' class from both buttons and reset indicator
+    const btn1 = document.getElementById('Education');
+   
+      btn1.classList.remove('bg-[rgb(18,18,18)]', 'bg-[rgb(28,28,28)]', 'text-gray-200');
+  
+    // Add the 'active' class to the clicked button
+    button.classList.add('bg-[rgb(18,18,18)]', 'text-gray-200');
+    
+    // Get the indicator div and calculate the position
+    const indicator = document.getElementById('indicator');
+    const buttonWidth = button.offsetWidth;
+    const buttonPosition = button.offsetLeft;
+
+    // Animate the indicator position based on the selected button
+    indicator.style.transform = `translateX(${buttonPosition}px)`;
+    indicator.style.width = `${buttonWidth}px`;
+  }
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const btnEdu = document.getElementById("edu-btn");
+    const btnExp = document.getElementById("exp-btn");
+    const eduSec = document.getElementById("Education");
+    const expSec = document.getElementById("Experience");
+
+    // Function to toggle sections
+    function toggleSection(selectedBtn) {
+        if (selectedBtn === "edu") {
+            eduSec.style.display = "flex";  // Show Education
+            expSec.style.display = "none";  // Hide Experience
+            
+        } else {
+            eduSec.style.display = "none";  // Hide Education
+            expSec.style.display = "flex";  // Show Experience
+          
+        }
+    }
+
+    // Event Listeners
+    btnEdu.addEventListener("click", () => toggleSection("edu"));
+    btnExp.addEventListener("click", () => toggleSection("exp"));
+
+    // Initialize with Education section visible
+    toggleSection("edu");
+});
+
+</script>
+
+
+<script src="https://kit.fontawesome.com/0a19dae1b0.js" crossorigin="anonymous"></script>
+</body>
+</html>
