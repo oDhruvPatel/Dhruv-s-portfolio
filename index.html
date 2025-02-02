@@ -532,23 +532,7 @@
   </main>
 
   <!-- Lenis Smooth Scrolling -->
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@latest/bundled/lenis.min.js"></script>
-  <script>
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => 1 - Math.pow(1 - t, 3),
-    });
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
-    // Dynamic Greeting Script
-  
-
-  </script>
   <script>
     const greetings = ["Namaste,", "Hello,", "Bonjour,", "Hola,", "Ciao,", "Konnichiwa,", "Guten Tag,"];
     let index = 0;
