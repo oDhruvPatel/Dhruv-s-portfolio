@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./Style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Portfolio</title>
+  <style>
+     .cursiv {
+      font-family: 'Dancing Script', cursive;
+     }
+
+     .poppins{
+      font-family: 'poppins';
+     }
+    body {
+      font-family: 'Roboto', sans-serif;
+      overflow-x: hidden;
+      background: rgb(8,8,8);
+      background-image: linear-gradient(to right, rgba(8, 8, 8, 0.8) 1px, transparent 1px), linear-gradient(to bottom, rgba(8, 8, 8, 0.8) 1px, transparent 1px);
+      background-size: 20px 20px; /* Grid size */
+    }
+
+    /* FIX: Prevents content shifting when scrollbar is hidden */
+    body.modal-open {
+      overflow: hidden !important;
+      padding-right: 15px; /* Compensate for typical scrollbar width */
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Inter', sans-serif;
+    }
+
+    #myImg {
+      background: url('./DP.jpeg');
+      background-position: top;
+      background-size: cover;
+      transition: all 0.5s;
+    }
+
+    #myImg:hover{
+      scale: 1.1;
+    }
+
+    #dynamic-greeting {
+      display: inline-block;
+      transition: opacity 0.5s ease-in-out;
+      opacity: 1;
+      width: 100%;  /* Fixed width */
+    }
+
+    .fade-out {
+      opacity: 0;
+    }
+
+    .grid {
+      opacity: 80%;
+      height: 100%;
+      width: 1px;
+      background: linear-gradient(to bottom, rgba(128, 128, 128, 0.2) 70%, rgba(128, 128, 128, 0) 100%);
+    }
+
+    .tech{
+      width: 220px;
+      height: 60px;
+      background: rgb(18, 18, 18);
+      border-radius: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .tech {
+        width: 250px;
+      }
+    }
+
+    /* NEW/MODIFIED: CSS for image zoom on hover in modal */
+    .project-modal-content .modal-images img {
+      transition: transform 0.3s ease-in-out;
+      cursor: zoom-in;
+      position: relative; /* Essential for z-index and scaling */
+      z-index: 10; /* Initial stacking context */
+      display: block; /* Ensure correct layout for scaling */
+    }
+
+    /* MODIFIED: Increased hover effect scale to 3.0x as requested */
+    .project-modal-content .modal-images img:hover {
+      transform: scale(3.0); /* Increased size by 300% on hover */
+      z-index: 1000; /* Bring it to the front */
+    }
+
+  </style>
+</head>
+
+<body class="bg-[rgb(8,8,8)]">
+  <div class="project-modal" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true" style="display:none;">
+  <div class="project-modal-content" role="document" aria-labelledby="modalTitle">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <div id="modalTitle" style="font-weight:700; font-size:1.1rem; color: #EDEDED;">Project Title</div>
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close project details">
+        ✕
+      </button>
+    </div>
+
+    <div style="margin-top:12px; color:#bfbfbf;" id="modalDescription">
+      </div>
+
+    <div class="modal-images" id="modalImages" style="margin-top:14px;">
+      <div style="margin-bottom: 10px;"><img id="modalImg1" src="" alt="" style="width:100%; height:auto; object-fit:contain; border-radius:8px; display: block;"></div>
+      <div style="margin-bottom: 10px;"><img id="modalImg2" src="" alt="" style="width:100%; height:auto; object-fit:contain; border-radius:8px; display: block;"></div>
+      <div style="margin-bottom: 10px;"><img id="modalImg3" src="" alt="" style="width:100%; height:auto; object-fit:contain; border-radius:8px; display: block;"></div>
+    </div>
+
+    </div>
+</div>
+
+  <main class="h-full md:w-[65vw] w-screen mx-auto md:p-0">
+
+    <div class="bg-transparent w-screen h-screen absolute top-0 left-0 flex justify-evenly -z-10">
+      <div class="grid"></div>
+      <div class="grid"></div>
+      <div class="grid"></div>
+      <div class="grid"></div>
+      <div class="grid"></div>
+      <div class="grid"></div>
+      <div class="grid md:block hidden"></div>
+      <div class="grid md:block hidden"></div>
+      <div class="grid md:block hidden"></div>
+      <div class="grid md:block hidden"></div>
+      <div class="grid md:block hidden"></div>
+      <div class="grid md:block hidden"></div>
+      <div class="grid md:block hidden"></div>
+      <div class="grid md:block hidden"></div>
+    </div>
+
+
+   <nav class="z-20 md:flex hidden sticky absolute top-2 w-full h-14 flex justify-between items-center mt-4 bg-[rgb(28,28,28)] text-gray-100/50 border border-[2px] border-gray-50/5 rounded-md pl-4 pr-2">
+     <div class="w-[15%] cursor-pointer cursiv text-gray-100 text-2xl">dp</div>
+     <div class="w-[70%] flex items-center justify-center gap-8">
+      <ul class="cursor-pointer hover:text-gray-100"><a href="">Home</a></ul>
+      <ul class="cursor-pointer hover:text-gray-100"><a href="#About">About</a></ul>
+      <ul class="cursor-pointer hover:text-gray-100"><a href="#Projects">Projects</a></ul>
+      <ul class="cursor-pointer hover:text-gray-100"><a href="#Education">Experience</a></ul>
+<ul class="cursor-pointer hover:text-gray-100"><a href="blogs.html">Blogs</a></ul>
+     </div>
+     <div class="w-[15%] cursor-pointer flex justify-end">
+      <button class="px-3 py-2 bg-indigo-200 rounded-md text-[rgb(8,8,8)] text-xs">
+        <a href="#Contact">Let's talk &#x2192;</a>
+      </button>
+     </div>
+   </nav>
+
+  <nav class="z-20 md:hidden sticky top-0 w-full h-14 flex justify-between items-center  bg-[rgb(28,28,28)] text-gray-100/50 border border-[2px] border-gray-50/5  pl-4 pr-2">
+  <div class="w-[50%] cursor-pointer cursiv text-gray-100 text-2xl">dp</div>
+  <div class="w-[50%] cursor-pointer flex justify-end">
+    <button
+      id="menu-button"
+      class="px-3 py-2 bg-gray-200 rounded-md text-[rgb(8,8,8)] text-xs"
+    >
+      Menu
+    </button>
+  </div>
+</nav>
+
+<div
+  id="menu-items"
+  class="sticky top-14 left-0 w-full bg-[rgb(28,28,28)] text-gray-100 flex flex-col items-center gap-4 py-4 hidden z-50"
+>
+  <ul class="cursor-pointer hover:text-gray-100">Home</ul>
+  <ul class="cursor-pointer hover:text-gray-100">About</ul>
+  <ul class="cursor-pointer hover:text-gray-100">Projects</ul>
+  <ul class="cursor-pointer hover:text-gray-100">Experience</ul>
+<ul class="cursor-pointer hover:text-gray-100"><a href="blogs.html">Blogs</a></ul>
+  <button class="px-3 py-2 bg-gray-200 rounded-md text-[rgb(8,8,8)] text-xs">
+    Let's talk &#x2192;
+  </button>
+</div>
+
+   <section class="w-full h-full md:mt-30 mb-64 my-32 md:px-0 px-2">
+    <div class="flex w-full h-full items-center justify-center gap-4">
+      <div class="profile h-28 w-28 rounded-full bg-transparent border-[1px]/40" id="myImg"></div>
+    </div>
+
+    <div class="mt-7 mb-8 text-gray-100/50 md:text-3xl text-2xl w-full flex justify-center items-center flex-col">
+      <h1>
+        <span id="dynamic-greeting" class="text-purple-200"> </span><br>
+        <h1 class="font-medium w-full flex items-center text-3xl justify-center text-center body text-transparent bg-clip-text bg-gradient-to-r from-gray-600 via-gray-300 to-white">
+          I am Dhruv <br>a software engineer with 4 months of industry experience
+        </h1>
+        </h1>
+    </div>
+
+    <div class="w-full h-full flex gap-9 justify-center">
+
+      <button class="px-5 py-2 font-medium rounded-md text-sm bg-[rgb(18,18,18)] flex items-center justify-center border border-gray-200/10 hover:bg-[rgb(38,38,38)]">
+        <h1 class="flex items-center gap-2 text-gray-200 font-medium">
+            <a href="#first">Scroll Down</a>
+            <span class="text-xl mb-[1px]">&#x2193;</span>
+        </h1>
+      </button>
+
+
+    </div>
+   </section>
+
+   <section class="w-full h-full rounded-lg md:px-0 px-2" id="first">
+
+    <h1 class="text-gray-200/70 text-xl w-full text-center"> <span class="text-gray-100">Technologies</span> that I work with</h1>
+
+   <div class="flex flex-col justify-center items-center w-full gap-4 mt-8">
+    <div class="flex md:flex-row flex-col w-full justify-center items-center gap-4">
+
+      <div class="tech text-white z-10 flex p-1 text-sm gap-3">
+        <div class="w-[30%] h-full rounded-lg flex items-center justify-center"><img src="./figma.png" class="h-10 w-10" alt=""></div>
+
+        <div class="w-[70%] h-full flex flex-col items-start justify-center">
+          <span>Figma</span>
+          <span class="opacity-30">for web designing</span>
+        </div>
+      </div>
+
+      <div class="tech text-white z-10 flex p-1 text-sm gap-3">
+        <div class="w-[30%] h-full rounded-lg flex items-center justify-center"><img src="./science.png" class="h-10 w-10" alt=""></div>
+        <div class="w-[70%] h-full flex flex-col items-start justify-center">
+          <span>React</span>
+          <span class="opacity-30">a JavaScript library</span>
+        </div>
+      </div>
+
+      <div class="tech text-white z-10 flex p-1 text-sm gap-3">
+        <div class="w-[30%] h-full rounded-lg flex items-center justify-center"><img src="./node-js.png" class="h-10 w-10" alt=""></div>
+        <div class="w-[70%] h-full flex flex-col items-start justify-center">
+          <span>Node</span>
+          <span class="opacity-30">a JavaScript library</span>
+        </div>
+      </div>
+
+
+
+      <div class="tech text-white z-10 flex p-1 text-sm gap-3">
+        <div class="w-[30%] h-full rounded-lg flex items-center justify-center"><img src="./express.png" class="h-10 w-10" alt=""></div>
+        <div class="w-[70%] h-full flex flex-col items-start justify-center">
+          <span>Express</span>
+          <span class="opacity-30">a Node.js Framework</span>
+        </div>
+      </div>
+      </div>
+
+
+  <div class="flex md:flex-row flex-col w-full justify-center items-center gap-4">
+
+        <div class="tech text-white z-10 flex p-1 text-sm gap-3">
+          <div class="w-[30%] h-full rounded-lg flex items-center justify-center"><img src="./Mongo.png" class="h-10 w-10" alt=""></div>
+          <div class="w-[70%] h-full flex flex-col items-start justify-center">
+            <span>MongoDB</span>
+            <span class="opacity-30">for backend database</span>
+          </div>
+        </div>
+
+        <div class="tech text-white z-10 flex p-1 text-sm gap-3">
+          <div class="w-[30%] h-full rounded-lg flex items-center justify-center"><img src="./firebase.png" class="h-10 w-10" alt=""></div>
+         <div class="w-[70%] h-full flex flex-col items-start justify-center">
+            <span>Google Firebase</span>
+            <span class="opacity-30">for database</span>
+          </div>
+        </div>
+
+        <div class="tech text-white z-10 flex p-1 text-sm gap-3">
+          <div class="w-[30%] h-full rounded-lg flex items-center justify-center"><img src="./tailwind.png" class="h-10 w-10" alt=""></div>
+          <div class="w-[70%] h-full flex flex-col items-start justify-center">
+            <span>Tailwindcss</span>
+            <span class="opacity-30">css framework</span>
+          </div>
+        </div>
+
+        <div class="tech text-white z-10 flex p-1 text-sm gap-3">
+          <div class="w-[30%] h-full rounded-lg flex items-center justify-center"><img src="./xd.png" class="h-10 w-10" alt=""></div>
+        <div class="w-[70%] h-full flex flex-col items-start justify-center">
+            <span>Adobe XD</span>
+            <span class="opacity-30">For website designing</span>
+          </div>
+        </div>
+
+
+    </div>
+   </div>
+
+
+   </section>
+
+
+   <section class="w-full h-full mt-28 rounded-lg md:px-0 px-2" id="Projects">
+    <h1 class="text-gray-200/70 text-xl w-full text-center">
+      <span class="text-gray-100">Projects</span> that I have worked with
+    </h1>
+
+    <div class="w-full h-full mt-12 flex md:flex-row flex-col flex-wrap justify-center md:gap-16 gap-6">
+
+      <div class="md:h-96 md:w-[45%] w-full h-80 bg-[rgb(18,18,18)] rounded-md flex flex-col p-4 gap-4 border border-[1px] border-gray-100/5"
+           data-img1="./P1.png"
+           data-img2="./P2.png"
+           data-img3="./P3.png"
+           data-full-desc="Built a full-stack application using JavaScript and React for frontend, Node/Express for RESTful API and MongoDB for database. Integrated OpenAI API to deliver real-time feedback and adaptive progress tracking, improving learner engagement by 25%."
+           data-tech-stack="Figma, React, JavaScript, HTML, CSS, Node.js, Express, MongoDB, OpenAI API"
+           data-repo-link="https://github.com/oDhruvPatel/LanguageTutor">
+        <div class="w-full h-[75%] bg-indigo-200 rounded-lg overflow-hidden">
+          <img src="./P1.png" alt="Language Learning App Screenshot 1">
+        </div>
+        <div class="w-full h-[25%]">
+          <h1 class="text-gray-100/90 font-bold mb-1">Language Learning App (Duolingo Clone)</h1>
+          <p class="text-sm text-gray-100/40">Helps users learn new languages using lessons & activities.</p>
+        </div>
+
+        <button class="view-more-btn px-5 py-2 font-medium rounded-md text-sm bg-[rgb(28,28,28)] border border-gray-200/10 hover:bg-[rgb(38,38,38)]">
+          <h1 class="flex items-center gap-2 text-gray-200 font-medium">View more</h1>
+        </button>
+      </div>
+
+      <div class="md:h-96 md:w-[45%] w-full h-80 bg-[rgb(18,18,18)] rounded-md flex flex-col p-4 gap-4 border border-[1px] border-gray-100/5"
+           data-img1="./PP1.png"
+           data-img2="./PP2.png"
+           data-img3="./PP3.png"
+           data-full-desc="Allows users to create, edit, and delete quotes. This full-stack application utilizes the MERN stack (MongoDB, Express, React, Node.js) for robust performance and dynamic content management."
+           data-tech-stack="Figma, React, JavaScript, HTML, CSS, Node.js, Express, MongoDB"
+           data-repo-link="#">
+        <div class="w-full h-[75%] bg-indigo-200 rounded-lg overflow-hidden">
+          <img src="./PP1.png" alt="Quote Sharing App Screenshot 1">
+        </div>
+        <div class="w-full h-[25%]">
+          <h1 class="text-gray-100/90 font-bold mb-1">Quote Sharing App</h1>
+          <p class="text-sm text-gray-100/40">Users can create, edit, and delete quotes.</p>
+        </div>
+
+        <button class="view-more-btn px-5 py-2 font-medium rounded-md text-sm bg-[rgb(28,28,28)] border border-gray-200/10 hover:bg-[rgb(38,38,38)]">
+          <h1 class="flex items-center gap-2 text-gray-200 font-medium">View more</h1>
+        </button>
+      </div>
+
+      <div class="md:h-96 md:w-[45%] w-full h-80 bg-[rgb(18,18,18)] rounded-md flex flex-col p-4 gap-4 border border-[1px] border-gray-100/5"
+           data-img1="./PPP1.png"
+           data-img2="./PPP2.png"
+           data-img3="./PPP3.png"
+           data-full-desc="Developed a Machine Learning model using Python to predict property pricing, including future estimation. The model leverages statistical techniques to provide accurate real estate valuations."
+           data-tech-stack="Machine Learning, Python"
+           data-repo-link="https://github.com/oDhruvPatel/Predinfra">
+        <div class="w-full h-[75%] bg-indigo-200 rounded-lg overflow-hidden">
+          <img src="https://www.slideteam.net/media/catalog/product/cache/1280x720/h/o/house_price_prediction_through_machine_learning_ml_cd_slide01.jpg" alt="House Price Prediction Screenshot 1">
+        </div>
+        <div class="w-full h-[25%]">
+          <h1 class="text-gray-100/90 font-bold mb-1">House Price Prediction</h1>
+          <p class="text-sm text-gray-100/40">ML model to predict property pricing with future estimation.</p>
+        </div>
+
+        <button class="view-more-btn px-5 py-2 font-medium rounded-md text-sm bg-[rgb(28,28,28)] border border-gray-200/10 hover:bg-[rgb(38,38,38)]">
+          <h1 class="flex items-center gap-2 text-gray-200 font-medium">View more</h1>
+        </button>
+      </div>
+
+      <div class="md:h-96 md:w-[45%] w-full h-80 bg-[rgb(18,18,18)] rounded-md flex flex-col p-4 gap-4 border border-[1px] border-gray-100/5"
+           data-img1="./PPPP1.png"
+           data-img2="./PPPP2.png"
+           data-img3="./PPPP3.png"
+           data-full-desc="Built a collaborative code editor using WebSocket for real-time bidirectional communication, supporting simultaneous editing and chat features. This boosts team productivity by 20% by enabling seamless pair programming. The project was presented to company stakeholders, showcasing design and user impact."
+           data-tech-stack="React, JavaScript, Node.js, Express, MongoDB, WebSocket"
+           data-repo-link="https://github.com/oDhruvPatel/Collaborative-Code-Editor">
+        <div class="w-full h-[75%] bg-indigo-200 rounded-lg overflow-hidden">
+          <img src="https://i.ytimg.com/vi/L8QzFU0k5OA/maxresdefault.jpg" alt="Collaborative Code Editor Screenshot 1">
+        </div>
+        <div class="w-full h-[25%]">
+          <h1 class="text-gray-100/90 font-bold mb-1">Collaborative Code Editor</h1>
+          <p class="text-sm text-gray-100/40">Real-time shared coding environment.</p>
+        </div>
+
+        <button class="view-more-btn px-5 py-2 font-medium rounded-md text-sm bg-[rgb(28,28,28)] border border-gray-200/10 hover:bg-[rgb(38,38,38)]">
+          <h1 class="flex items-center gap-2 text-gray-200 font-medium">View more</h1>
+        </button>
+      </div>
+
+    </div>
+   </section>
+
+
+    <section class="w-full h-full mt-28 rounded-lg md:px-0 px-2">
+
+      <div class="w-full h-12 rounded-md bg-[rgb(18,18,18)] p-1 flex gap-2 relative">
+        <button id="edu-btn" class="w-full py-2 font-medium rounded-md text-sm bg-[rgb(18,18,18)] flex items-center justify-center transition-all duration-300" onclick="toggleActive(this)">
+            <h1 class="flex items-center gap-2 text-gray-200 font-medium z-10">
+                Education
+            </h1>
+        </button>
+
+        <button id="exp-btn" class="w-full py-2 font-medium rounded-md text-sm bg-[rgb(18,18,18)] flex items-center justify-center transition-all duration-300" onclick="toggleActive(this)">
+            <h1 class="flex items-center gap-2 text-gray-200 font-medium z-10">
+                Experience
+            </h1>
+        </button>
+
+        <div id="indicator" class="z-5 absolute w-1/2 h-[80%] rounded-md bg-[rgb(48,48,48)] border-[1px] border-gray-100/5 transition-all duration-300"></div>
+    </div>
+
+      <div class="w-full h-auto py-8 flex items-center" id="Education">
+
+       <div class="timeline">
+
+        <div class="cont left-cont">
+          <div class="h-4 w-4 bg-indigo-200 rounded-full dott"></div>
+          <div class="text-box">
+            <h2 class="!text-gray-100 text-md">Master of Applied Computing</h2>
+            <small class="text-xs text-white/70">2025 - present</small>
+            <p class="text-sm">Ongoing (No Grade Yet), Focusing on Software Engineering and Computing Concepts</p>
+            <span class="left-cont-arrow"> </span>
+          </div>
+        </div>
+
+        <div class="cont right-cont">
+          <div class="h-4 w-4 bg-indigo-200 rounded-full dott"></div>
+          <div class="text-box">
+            <h2 class="!text-gray-100 text-md">B.E Computer Science</h2>
+            <small class="text-xs text-white/70">2021 - 2024</small>
+            <p class="text-sm">8.30/10 GPA, Learned Data Structures, and specialized on AI/ML and Machine Learning </p>
+            <span class="right-cont-arrow"> </span>
+          </div>
+        </div>
+
+
+        <div class="cont left-cont">
+          <div class="h-4 w-4 bg-indigo-200 rounded-full dott"></div>
+          <div class="text-box">
+            <h2 class="!text-gray-100 text-md">Diploma in Computer Engineering</h2>
+            <small class="text-xs text-white/70">2018 - 2021</small>
+            <p class="text-sm">8.90/10 GPA, learned Web development skills, developed varios projects</p>
+            <span class="left-cont-arrow"> </span>
+          </div>
+        </div>
+
+
+        <div class="cont right-cont">
+          <div class="h-4 w-4 bg-indigo-200 rounded-full dott"></div>
+          <div class="text-box">
+            <h2 class="!text-gray-100 text-md">10th grade</h2>
+            <small class="text-xs text-white/70">2018</small>
+            <p class="text-sm">67% , Learnd basic computer skills, like MS word, Excel, HTML, CSS</p>
+            <span class="right-cont-arrow"> </span>
+          </div>
+        </div>
+
+
+       </div>
+
+     </div>
+
+
+
+      <div class="w-full h-auto py-8 flex items-center" id="Experience">
+
+       <div class="timeline">
+
+        <div class="cont left-cont">
+          <div class="h-4 w-4 bg-indigo-200 rounded-full dott"></div>
+          <div class="text-box">
+            <h2 class="!text-gray-100 text-md">Software Developer - Full Stack</h2>
+            <small class="text-xs text-white/70">2024</small>
+            <p class="text-sm">Worked with React, Node, MongoDB, Express and worked on live projects</p>
+            <span class="left-cont-arrow"> </span>
+          </div>
+        </div>
+
+        <div class="cont right-cont">
+          <div class="h-4 w-4 bg-indigo-200 rounded-full dott"></div>
+          <div class="text-box">
+            <h2 class="!text-gray-100 text-md">Software Developer intern - CyberSec & Iot</h2>
+            <small class="text-xs text-white/70">2023</small>
+            <p class="text-sm">Worked with Iot devices, SAP analytics Cloud</p>
+            <span class="right-cont-arrow"> </span>
+          </div>
+        </div>
+
+       </div>
+
+    </div>
+
+
+   <section id="About" class="w-full h-full mt-20 bg-[rgb(28,28,28)] rounded-lg md:p-8 p-4">
+     <h1 class="md:text-xl text-sm text-gray-100/40">
+
+      <span class="text-gray-100/70">Dhruv Patel is a Master’s student in Applied Computing with a background in software development.
+        He has gained hands-on experience in Node.js through internships</span> and worked with tools like Power BI
+      and SAP Analytics Cloud for data analysis. Dhruv is passionate about innovation and exploring fields like
+      Cyber Security in IoT. He’s also focused on building a professional developer portfolio and aspires to become
+      a software engineer. Outside of tech, Dhruv enjoys cooking and continuously seeks new opportunities to learn and grow.
+     </h1>
+     <h2 class="cursiv text-gray-100 text-3xl mt-4">dhruv</h2>
+
+     <div class="flex gap-8 mt-8 text-gray-100">
+      <h1>
+        <div class="font-extrabold text-3xl">5<span class="text-lime-400">+</span></div>
+        <span class="text-[11px] uppercase text-gray-100/40">projects done</span>
+       </h1>
+
+       <h1>
+        <div class="font-extrabold text-3xl">4<span class="text-lime-400">+</span></div>
+        <span class="text-[11px] uppercase text-gray-100/40">months of experience</span>
+       </h1>
+
+       <h1>
+        <div class="font-extrabold text-3xl">100<span class="text-lime-400">%</span></div>
+        <span class="text-[11px] uppercase text-gray-100/40">client satisfaction</span>
+       </h1>
+     </div>
+
+   </section>
+
+
+   <section id="Contact" class="w-full h-full mt-20 rounded-lg md:p-8 p-4">
+
+
+      <div class="md:w-[40%] w-full flex mx-auto">
+        <div class="w-full">
+
+          <h1 class="w-full text-center  text-gray-200/70">contact me</h1>
+      <h1 class="text-gray-100 my-2 w-full text-center"> <span class="text-gray-100/70 ">Email me at:
+      </span> <span class="underline font-medium">dhruvptl273@gmail.com</span> </h1>
+
+      <h1 class="text-gray-100 my-2 w-full text-center"> <span class="text-gray-100/70 ">Contact me at:
+      </span> <span class="underline font-medium">+1 (519) 980-7637</span> </h1>
+
+        </div>
+
+
+
+     <div class="w-full">
+
+      <h1 class="w-full text-center mt-2  text-gray-100/70">
+        socials
+      </h1>
+
+      <div class="flex flex-col w-full  text-indigo-200 justify-center items-center mt-2">
+         <ul> <a href="https://www.linkedin.com/in/dhruvptl2702/">LinkedIn</a> </ul>
+         <ul> <a href="https://x.com/Dhruv_2723">Twitter</a> </ul>
+         <ul> <a href="https://github.com/oDhruvPatel">Github</a> </ul>
+      </div>
+     </div>
+      </div>
+
+   </section>
+
+
+
+
+  </main>
+
+  <script>
+    const menuButton = document.getElementById("menu-button");
+    const menuItems = document.getElementById("menu-items");
+
+    menuButton.addEventListener("click", () => {
+      menuItems.classList.toggle("hidden");
+    });
+  </script>
+
+  <script>
+    function toggleActive(button) {
+      const btn1 = document.getElementById('Education');
+      btn1.classList.remove('bg-[rgb(18,18,18)]', 'bg-[rgb(28,28,28)]', 'text-gray-200');
+      button.classList.add('bg-[rgb(18,18,18)]', 'text-gray-200');
+      const indicator = document.getElementById('indicator');
+      const buttonWidth = button.offsetWidth;
+      const buttonPosition = button.offsetLeft;
+      indicator.style.transform = `translateX(${buttonPosition}px)`;
+      indicator.style.width = `${buttonWidth}px`;
+    }
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const btnEdu = document.getElementById("edu-btn");
+      const btnExp = document.getElementById("exp-btn");
+      const eduSec = document.getElementById("Education");
+      const expSec = document.getElementById("Experience");
+
+      function toggleSection(selectedBtn) {
+          if (selectedBtn === "edu") {
+              eduSec.style.display = "flex";
+              expSec.style.display = "none";
+          } else {
+              eduSec.style.display = "none";
+              expSec.style.display = "flex";
+          }
+      }
+
+      btnEdu.addEventListener("click", () => toggleSection("edu"));
+      btnExp.addEventListener("click", () => toggleSection("exp"));
+
+      toggleSection("edu");
+  });
+  </script>
+
+  <script>
+    (function(){
+      const modal = document.getElementById('projectModal');
+      const modalClose = document.getElementById('modalCloseBtn');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalDescription = document.getElementById('modalDescription');
+      const modalImg1 = document.getElementById('modalImg1');
+      const modalImg2 = document.getElementById('modalImg2');
+      const modalImg3 = document.getElementById('modalImg3');
+
+      // Default placeholder image
+      const placeholderImage = "https://via.placeholder.com/600x400?text=Image+Placeholder";
+
+      // Attach click handlers to every 'View more' button
+      const viewBtns = document.querySelectorAll('.view-more-btn');
+      viewBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          // Find nearest project card container
+          const card = btn.closest('[class*="bg-[rgb(18,18,18)]"]') || btn.closest('div');
+
+          // Get data attributes
+          const titleEl = card.querySelector('h1');
+          const fullDescription = card.getAttribute('data-full-desc');
+          const techStack = card.getAttribute('data-tech-stack');
+          const repoLink = card.getAttribute('data-repo-link');
+
+          // Get images from data attributes
+          const img1Url = card.getAttribute('data-img1') || placeholderImage;
+          const img2Url = card.getAttribute('data-img2') || placeholderImage;
+          const img3Url = card.getAttribute('data-img3') || placeholderImage;
+
+          modalTitle.textContent = titleEl ? titleEl.textContent.trim() : "Project Details";
+
+          // Format the detailed content using the new data attributes
+          let descriptionHTML = `<p>${fullDescription}</p><br>`;
+          descriptionHTML += `<p><strong>Tech stack:</strong> ${techStack}</p>`;
+
+          if (repoLink && repoLink !== '#') {
+              descriptionHTML += `<p><strong>Repository:</strong> <a href="${repoLink}" target="_blank" rel="noopener noreferrer" style="text-decoration:underline; color:#93c5fd;">View on GitHub</a></p>`;
+          } else {
+              descriptionHTML += `<p><strong>Repository:</strong> N/A</p>`;
+          }
+
+          modalDescription.innerHTML = descriptionHTML;
+
+          // Fill images with the URLs from the data attributes
+          modalImg1.src = img1Url;
+          modalImg2.src = img2Url;
+          modalImg3.src = img3Url;
+
+          // Show modal
+          modal.style.display = 'flex';
+          modal.setAttribute('aria-hidden', 'false');
+
+          // FIX: Add class to body to prevent scroll shift
+          document.body.classList.add('modal-open');
+        });
+      });
+
+      // Close function
+      function closeModal(){
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+        // FIX: Remove class to restore scroll and remove padding
+        document.body.classList.remove('modal-open');
+      }
+
+      modalClose.addEventListener('click', closeModal);
+
+      // Close when clicking overlay (but not content)
+      modal.addEventListener('click', function(e){
+        if (e.target === modal) closeModal();
+      });
+
+      // Close on ESC
+      document.addEventListener('keydown', function(e){
+        if (e.key === "Escape" && modal.style.display === 'flex') {
+          closeModal();
+        }
+      });
+
+      // Accessibility: focus trap simple approach (send focus to close button when opened)
+      viewBtns.forEach(b => {
+        b.addEventListener('click', () => {
+          setTimeout(()=> modalClose.focus(), 100);
+        });
+      });
+    })();
+  </script>
+
+
+<script src="https://kit.fontawesome.com/0a19dae1b0.js" crossorigin="anonymous"></script>
+</body>
+</html>

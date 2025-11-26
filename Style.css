@@ -1,0 +1,210 @@
+nav{
+    font-family: 'poppins';
+}
+
+#btn-contact button{
+    word-spacing: 20px;
+}
+
+/* Education and Experience Section */
+
+.timeline{
+    position: relative;
+    width: 100%;
+}
+
+.cont{
+    position: relative;
+    padding: 10px 50px;
+    width: 50%;
+    /* background-color: beige; */
+}
+
+.text-box{
+    padding: 20px 30px;
+    background: rgb(18, 18, 18);
+    position: relative;
+    border-radius: 10px;
+    color: gray;
+}
+
+.left-cont{
+ left: 0;
+}
+
+.right-cont{
+  left: 50%;
+}
+
+
+.dott{
+    position: absolute;
+    width: 40px;
+    right: -6px;
+    top: 25px;
+    z-index: 10;
+}
+
+.right-cont .dott{
+    left: -10px;
+}
+
+.timeline::after{
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    top: 0;
+    right: 50%;
+    margin-left: -3px;
+}
+
+.left-cont-arrow{
+    height: 0;
+    width: 0;
+    position: absolute;
+    top: 15px;
+    z-index: 1;
+    border-top: 15px solid transparent;
+    border-bottom:15px solid transparent;
+    border-left: 15px solid rgb(18, 18, 18);
+    right: -15px;
+
+}
+
+.right-cont-arrow{
+    height: 0;
+    width: 0;
+    position: absolute;
+    top: 15px;
+    z-index: 1;
+    border-top: 15px solid transparent;
+    border-bottom:15px solid transparent;
+    border-right: 15px solid rgb(18, 18, 18);
+    left: -14px;
+
+}
+
+
+@media (max-width: 768px) {
+    
+.timeline{
+    margin: 50px auto;
+
+}
+
+.timeline::after{
+    left: 30px;
+}
+
+.cont{
+    width: 100%;
+    padding-left: 60px;
+    padding-right: 20px;
+}
+
+.text-box{
+ width: 100%;
+ padding: 10px;
+}
+
+.right-cont{
+     left: 0;
+}
+
+.left-cont .dott, .right-cont .dott{
+ left: 20px;
+}
+
+.left-cont-arrow, .right-cont-arrow{
+    border-right: 15px solid rgb(18, 18, 18);
+    border-left: 0;
+    left: -14px;
+}
+  
+  
+  }
+
+/* Education and Experience Section ends */
+
+/* =======================
+   PROJECT POPUP MODAL
+   ======================= */
+
+.project-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 9999;
+}
+
+.project-modal-content {
+    width: 100%;
+    max-width: 600px;
+    background: rgb(18,18,18);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 20px;
+    color: white;
+}
+
+.modal-close-btn {
+    width: 30px;
+    height: 30px;
+    background: rgb(28,28,28);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    float: right;
+}
+
+.modal-images {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modal-images div {
+    flex: 1;
+    height: 80px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+    .project-modal-content {
+        max-width: 90%;
+    }
+
+    .modal-images {
+        flex-direction: column;
+    }
+
+    .modal-images div {
+        height: 100px;
+    }
+}
+
+
+
+.project-modal-content {
+    /* To change the width of the popup: */
+    width: 90%; /* Example: 90% of the screen width */
+    max-width: 800px; /* Example: Limit the maximum size to 800px */
+    min-height: 60vh;
+    
+    /* To change the height of the popup (optional, usually better to let content define it): */
+    /* max-height: 90vh; */ /* Example: Limit the height to 90% of the viewport height */
+}
